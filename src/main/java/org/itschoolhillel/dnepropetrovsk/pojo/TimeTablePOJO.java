@@ -30,4 +30,5 @@ public class TimeTablePOJO implements TimeTable {
     public List<Lecture> lecturesTo(Date date) {
         return lectures;
     }
+
 }

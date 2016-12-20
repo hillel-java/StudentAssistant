@@ -17,7 +17,9 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by stephenvolf on 11/12/16.
@@ -26,11 +28,15 @@ public class Main {
     private final static Logger LL = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        if (args.length == 0){
-            LL.error("No arguments passed. Exiting.");
-            return;
-        }
-        String courseName = args[0];
+//        if (args.length == 0){
+//            LL.error("No arguments passed. Exiting.");
+//            return;
+//        }
+//        String courseName = args[0];
+
+        readSubscriptions();
+
+        String courseName = "java12";
 
         Path courseFile = Paths.get("src/main/resources", courseName + ".txt");
 
@@ -60,9 +66,29 @@ public class Main {
         print(course);
     }
 
-    private static void print(Course course){
+    private static Map<Integer, List<String>> readSubscriptions() {
+        Map<Integer, List<String>> result = new HashMap<>();
+        Path subs = Paths.get("src/main/resources/subscriptions.txt");
+
+        byte[] json;
+        try {
+            json = Files.readAllBytes(subs);
+        } catch (IOException e) {
+            LL.error("Failed to open file", e);
+            return result;
+        }
+
+        try {
+            result = new ObjectMapper().readValue(json, Map.class);
+        } catch (IOException e) {
+            LL.error("Failed to read file", e);
+        }
+        return result;
+    }
+
+    private static void print(Course course) {
         System.out.println("Course: " + course.title());
-        for(Lecture lecture : course.timeTable().allLectures()){
+        for (Lecture lecture : course.timeTable().allLectures()) {
             System.out.println("Lecture " + lecture.title());
             System.out.println("start: " + lecture.startTime());
             System.out.println("end: " + lecture.endTime());
