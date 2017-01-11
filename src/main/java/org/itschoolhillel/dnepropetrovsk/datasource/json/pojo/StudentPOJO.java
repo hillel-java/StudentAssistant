@@ -1,6 +1,7 @@
-package org.itschoolhillel.dnepropetrovsk.pojo;
+package org.itschoolhillel.dnepropetrovsk.datasource.json.pojo;
 
 import org.itschoolhillel.dnepropetrovsk.entity.Student;
+import org.itschoolhillel.dnepropetrovsk.entity.TimeTable;
 
 /**
  * Created by svolkovskyi on 20.12.16.
@@ -26,6 +27,11 @@ public class StudentPOJO implements Student {
 
     @Override
     public String surname() {
+        return null;
+    }
+
+    @Override
+    public TimeTable timeTable() {
         return null;
     }
 }

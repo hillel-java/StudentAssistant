@@ -6,4 +6,5 @@ package org.itschoolhillel.dnepropetrovsk.entity;
 public interface Course {
     String title();
     TimeTable timeTable();
+    void print();
 }

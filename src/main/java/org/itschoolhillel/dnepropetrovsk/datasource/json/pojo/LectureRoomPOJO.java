@@ -1,4 +1,4 @@
-package org.itschoolhillel.dnepropetrovsk.pojo;
+package org.itschoolhillel.dnepropetrovsk.datasource.json.pojo;
 
 import org.itschoolhillel.dnepropetrovsk.entity.LectureRoom;
 
@@ -9,6 +9,14 @@ public class LectureRoomPOJO implements LectureRoom {
     public int floor;
     public int number;
     public String description;
+
+    public LectureRoomPOJO(){}
+
+    public LectureRoomPOJO(int floor, int number, String description) {
+        this.floor = floor;
+        this.number = number;
+        this.description = description;
+    }
 
     @Override
     public int floor() {

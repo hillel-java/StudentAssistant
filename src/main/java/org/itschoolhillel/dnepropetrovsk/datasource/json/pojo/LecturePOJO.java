@@ -1,4 +1,4 @@
-package org.itschoolhillel.dnepropetrovsk.pojo;
+package org.itschoolhillel.dnepropetrovsk.datasource.json.pojo;
 
 import org.itschoolhillel.dnepropetrovsk.entity.Lecture;
 import org.itschoolhillel.dnepropetrovsk.entity.LectureRoom;
@@ -14,6 +14,16 @@ public class LecturePOJO implements Lecture {
     public LectureRoomPOJO lectureRoom;
     public String title;
     public String description;
+
+    public LecturePOJO(){}
+
+    public LecturePOJO(Date startTime, Date endTime, LectureRoomPOJO lectureRoom, String title, String description) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.lectureRoom = lectureRoom;
+        this.title = title;
+        this.description = description;
+    }
 
     @Override
     public Date startTime() {

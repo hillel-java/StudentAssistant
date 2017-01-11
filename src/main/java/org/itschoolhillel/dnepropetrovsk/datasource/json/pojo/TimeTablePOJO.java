@@ -1,4 +1,4 @@
-package org.itschoolhillel.dnepropetrovsk.pojo;
+package org.itschoolhillel.dnepropetrovsk.datasource.json.pojo;
 
 import org.itschoolhillel.dnepropetrovsk.entity.Lecture;
 import org.itschoolhillel.dnepropetrovsk.entity.TimeTable;
