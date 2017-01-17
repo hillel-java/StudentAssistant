@@ -27,18 +27,18 @@ public abstract class AbstractRequest <S extends StatementContext.ExecutionStrat
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            close(connection);
-            close(statement);
-            close(resultSet);
+            close(connection, statement, resultSet);
         }
     }
 
-    private void close(AutoCloseable entity) {
-        if (entity != null) {
-            try {
-                entity.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void close(AutoCloseable... entities){
+        for(AutoCloseable entity : entities){
+            if (entity != null) {
+                try {
+                    entity.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
