@@ -7,20 +7,14 @@ import java.sql.SQLException;
 /**
  * Created by stephenvolf on 11/01/17.
  */
-public interface StatementContext<V> {
+public interface StatementContext {
 
     String sql();
 
-    ExecutionStrategy strategy();
+    <S extends ExecutionStrategy> S strategy();
 
-    V result();
-
-    interface ExecutionStrategy<T> {
+    interface ExecutionStrategy {
         void setParameters(PreparedStatement statement) throws SQLException;
-
-        void extractResult(ResultSet resultSet) throws SQLException;
-
-        T result();
     }
 
 }

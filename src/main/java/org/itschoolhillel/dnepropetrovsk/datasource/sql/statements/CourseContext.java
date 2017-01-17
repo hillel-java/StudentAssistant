@@ -17,40 +17,9 @@ import java.util.List;
 /**
  * Created by stephenvolf on 11/01/17.
  */
-public class CourseContext implements StatementContext<Course> {
+public class CourseContext implements QueryContext<Course> {
     private final String courseName;
-    private final ExecutionStrategy<List<Lecture>> strategy = new ExecutionStrategy<List<Lecture>>() {
-        private final List<Lecture> result = new LinkedList<>();
-
-        @Override
-        public void setParameters(PreparedStatement statement) throws SQLException {
-            statement.setString(1, courseName);
-        }
-
-        @Override
-        public void extractResult(ResultSet resultSet) throws SQLException {
-            while (resultSet.next()) {
-                Date startDate = resultSet.getDate("start_time");
-                Date endDate = resultSet.getDate("end_time");
-                int floor = resultSet.getInt("roomFloor");
-                int roomNumber = resultSet.getInt("roomNumber");
-                String roomDescription = resultSet.getString("roomDescription");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                LectureRoomPOJO lectureRoom = new LectureRoomPOJO(floor, roomNumber, roomDescription);
-                Lecture lecture = new LecturePOJO(startDate, endDate, lectureRoom, title, description);
-                result.add(lecture);
-            }
-        }
-
-        @Override
-        public List<Lecture> result() {
-            return result;
-        }
-
-
-    };
-
+    private final QueryStrategy<List<Lecture>> strategy = new CourseStatementStrategy();
     public CourseContext(String courseName) {
         this.courseName = courseName;
     }
@@ -78,8 +47,37 @@ public class CourseContext implements StatementContext<Course> {
     }
 
     @Override
-    public ExecutionStrategy strategy() {
+    public QueryStrategy strategy() {
         return strategy;
     }
 
+    private class CourseStatementStrategy implements QueryStrategy<List<Lecture>> {
+        private final List<Lecture> result = new LinkedList<>();
+
+        @Override
+        public void setParameters(PreparedStatement statement) throws SQLException {
+            statement.setString(1, courseName);
+        }
+
+        @Override
+        public void extractResult(ResultSet resultSet) throws SQLException {
+            while (resultSet.next()) {
+                Date startDate = resultSet.getDate("start_time");
+                Date endDate = resultSet.getDate("end_time");
+                int floor = resultSet.getInt("roomFloor");
+                int roomNumber = resultSet.getInt("roomNumber");
+                String roomDescription = resultSet.getString("roomDescription");
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                LectureRoomPOJO lectureRoom = new LectureRoomPOJO(floor, roomNumber, roomDescription);
+                Lecture lecture = new LecturePOJO(startDate, endDate, lectureRoom, title, description);
+                result.add(lecture);
+            }
+        }
+
+        @Override
+        public List<Lecture> result() {
+            return result;
+        }
+    }
 }

@@ -6,6 +6,7 @@ import org.itschoolhillel.dnepropetrovsk.datasource.EntitySource;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.CourseContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.StatementContext;
 import org.itschoolhillel.dnepropetrovsk.entity.Course;
+import org.itschoolhillel.dnepropetrovsk.entity.Lecture;
 import org.itschoolhillel.dnepropetrovsk.entity.Student;
 
 import java.sql.SQLException;
@@ -34,9 +35,9 @@ public class SQLEntitySource implements EntitySource {
             }
 
             BoneCPConfig config = new BoneCPConfig();
-            config.setJdbcUrl("jdbc:mysql://localhost:3306/sa");
-            config.setUsername("sa_user");
-            config.setPassword("sa_pwd");
+            config.setJdbcUrl("jdbc:mysql://mysql-t2micro.c6wjr65m2iif.us-west-2.rds.amazonaws.com:3306/students_assistant");
+            config.setUsername("student");
+            config.setPassword("student");
 
             try {
                 pool = new BoneCP(config);
@@ -54,9 +55,13 @@ public class SQLEntitySource implements EntitySource {
             init();
         }
         CourseContext context = new CourseContext(courseName);
-        SQLStatement statement = new SQLStatement(pool, context);
-        statement.executeQuery();
+        SQLStatement statement = new SQLStatement(pool);
+        statement.executeQuery(context);
         return context.result();
+    }
+
+    public void addLecture(Course course, Lecture lecture){
+
     }
 
     @Override
