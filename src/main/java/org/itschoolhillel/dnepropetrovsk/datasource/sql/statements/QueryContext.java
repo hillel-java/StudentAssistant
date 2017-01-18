@@ -10,9 +10,6 @@ public interface QueryContext<V> extends StatementContext {
 
     V result();
 
-    @Override
-    QueryStrategy strategy();
-
     interface QueryStrategy<T> extends ExecutionStrategy {
 
         void extractResult(ResultSet resultSet) throws SQLException;

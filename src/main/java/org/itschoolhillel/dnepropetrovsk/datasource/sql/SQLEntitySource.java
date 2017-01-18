@@ -3,7 +3,9 @@ package org.itschoolhillel.dnepropetrovsk.datasource.sql;
 import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 import org.itschoolhillel.dnepropetrovsk.datasource.EntitySource;
+import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.AddLecture;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.CourseContext;
+import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.NewLecture;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.StatementContext;
 import org.itschoolhillel.dnepropetrovsk.entity.Course;
 import org.itschoolhillel.dnepropetrovsk.entity.Lecture;
@@ -60,8 +62,16 @@ public class SQLEntitySource implements EntitySource {
         return context.result();
     }
 
-    public void addLecture(Course course, Lecture lecture){
+    public void addLecture(Course course, Lecture lecture, int roomId){
+        if (!initialized.get()){
+            init();
+        }
+        NewLecture newLectureContext = new NewLecture(lecture, roomId);
+        AddLecture addLectureContext = new AddLecture(1, lecture.startTime(), roomId);
 
+        SQLStatement statement = new SQLStatement(pool);
+        statement.executeUpdate(newLectureContext);
+        statement.executeUpdate(addLectureContext);
     }
 
     @Override

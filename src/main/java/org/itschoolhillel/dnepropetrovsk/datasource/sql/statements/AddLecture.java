@@ -1,32 +1,31 @@
 package org.itschoolhillel.dnepropetrovsk.datasource.sql.statements;
 
+import org.itschoolhillel.dnepropetrovsk.entity.Lecture;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
- * Created by stephenvolf on 15/01/17.
+ * Created by stephenvolf on 18/01/17.
  */
 public class AddLecture implements StatementContext, StatementContext.ExecutionStrategy {
-    @Override
-    public String sql() {
-        //какая-то фигня, не знаю
-        StatementContext context = new AddLecture();
-        ExecutionStrategy strategy = new AddLecture();
 
-        //приведение типов
-        StatementContext contextFromStrategy = (StatementContext) strategy;
+    private int courseId;
+    private Timestamp startTime;
+    private int roomId;
 
-        ((StatementContext) strategy).strategy();
-
-        getResult(); //эта херня все равно вернет false, но ее надо вызвать иначе не заработает
-
-        return null;
-
+    public AddLecture(int courseId, Date startDate, int roomId){
+        this.courseId = courseId;
+        this.startTime = new Timestamp(startDate.getTime());
+        this.roomId = roomId;
     }
 
-    public boolean getResult(){
-        //TODO: implement this
-        return false;
+    @Override
+    public String sql() {
+        return "insert into course_lectures(course_id, lecture_id)" +
+                " select ?, id from lectures where start_time=? and lecture_room_id=?";
     }
 
     @Override
@@ -36,6 +35,8 @@ public class AddLecture implements StatementContext, StatementContext.ExecutionS
 
     @Override
     public void setParameters(PreparedStatement statement) throws SQLException {
-
+        statement.setInt(1, courseId);
+        statement.setTimestamp(2, startTime);
+        statement.setInt(3, roomId);
     }
 }

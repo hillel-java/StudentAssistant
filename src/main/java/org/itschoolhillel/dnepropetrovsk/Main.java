@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by stephenvolf on 11/12/16.
@@ -29,5 +30,4 @@ public class Main {
         Application app = new Application(from, to, courseName);
         app.run();
     }
-
 }
