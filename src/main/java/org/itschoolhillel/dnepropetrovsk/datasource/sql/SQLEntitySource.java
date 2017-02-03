@@ -6,12 +6,10 @@ import org.itschoolhillel.dnepropetrovsk.datasource.EntitySource;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.AddLecture;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.CourseContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.NewLecture;
-import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.StatementContext;
 import org.itschoolhillel.dnepropetrovsk.entity.Course;
 import org.itschoolhillel.dnepropetrovsk.entity.Lecture;
-import org.itschoolhillel.dnepropetrovsk.entity.Student;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,15 +60,16 @@ public class SQLEntitySource implements EntitySource {
         return context.result();
     }
 
-    public void addLecture(Course course, Lecture lecture, int roomId){
-        if (!initialized.get()){
+    public void addLecture(Course course, Lecture lecture) {
+        if (!initialized.get()) {
             init();
         }
-        NewLecture newLectureContext = new NewLecture(lecture, roomId);
-        AddLecture addLectureContext = new AddLecture(1, lecture.startTime(), roomId);
+
+        NewLecture newLectureContext = new NewLecture(lecture, 4);
 
         SQLStatement statement = new SQLStatement(pool);
-        statement.executeUpdate(newLectureContext);
+        statement.executeInsert(newLectureContext);
+        AddLecture addLectureContext = new AddLecture(1, newLectureContext.generatedKey());
         statement.executeUpdate(addLectureContext);
     }
 

@@ -9,12 +9,13 @@ import java.sql.Timestamp;
 /**
  * Created by stephenvolf on 15/01/17.
  */
-public class NewLecture implements StatementContext, StatementContext.ExecutionStrategy {
+public class NewLecture implements InsertContext, InsertContext.InsertStrategy {
     private final Timestamp startTime;
     private final Timestamp endTime;
     private final int roomId;
     private final String title;
     private final String description;
+    private int lectureId;
 
     public NewLecture(Lecture lecture, int roomId) {
         this.startTime = new Timestamp(lecture.startTime().getTime());
@@ -44,4 +45,13 @@ public class NewLecture implements StatementContext, StatementContext.ExecutionS
         return this;
     }
 
+    @Override
+    public int generatedKey() {
+        return lectureId;
+    }
+
+    @Override
+    public void onGeneratedKey(int generatedKey) {
+        this.lectureId = generatedKey;
+    }
 }

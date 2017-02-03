@@ -1,13 +1,10 @@
 package org.itschoolhillel.dnepropetrovsk.datasource.sql;
 
 import com.jolbox.bonecp.BoneCP;
-import com.sun.glass.ui.EventLoop;
+import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.InsertContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.QueryContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.StatementContext;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -21,7 +18,7 @@ public class SQLStatement {
     }
 
     public void executeUpdate(StatementContext context) {
-        AbstractRequest.CUDRequest request = new AbstractRequest.CUDRequest();
+        AbstractRequest.UDRequest request = new AbstractRequest.UDRequest();
         request.doRequest(connectionPool, context);
     }
 
@@ -30,15 +27,8 @@ public class SQLStatement {
         request.doRequest(connectionPool, context);
     }
 
-    public void executeQueryV2(QueryContext<?> context){
-        new AbstractRequest<QueryContext.QueryStrategy>() {
-            @Override
-            protected void applyIternalStrategy(QueryContext.QueryStrategy strategy) throws SQLException {
-                resultSet = statement.executeQuery();
-                strategy.extractResult(resultSet);
-            }
-        }.doRequest(connectionPool, context);
+    public void executeInsert(InsertContext context){
+        AbstractRequest.InsertRequest request = new AbstractRequest.InsertRequest();
+        request.doRequest(connectionPool, context);
     }
-
-
 }

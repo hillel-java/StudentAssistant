@@ -36,7 +36,7 @@ public class Application {
 
 
         Lecture lecture = new LecturePOJO(startTime, endDime, null, "title", "decription");
-        entitySource.addLecture(null, lecture, 4);
+        entitySource.addLecture(null, lecture);
 
 
         Course course = entitySource.course(this.courseName);

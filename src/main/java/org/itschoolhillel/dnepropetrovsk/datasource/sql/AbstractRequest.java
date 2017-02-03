@@ -1,13 +1,11 @@
 package org.itschoolhillel.dnepropetrovsk.datasource.sql;
 
 import com.jolbox.bonecp.BoneCP;
+import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.InsertContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.QueryContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.StatementContext;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by stephenvolf on 15/01/17.
@@ -20,7 +18,7 @@ public abstract class AbstractRequest <S extends StatementContext.ExecutionStrat
         Connection connection = null;
         try {
             connection = connectionPool.getConnection();
-            statement = connection.prepareStatement(context.sql());
+            statement = connection.prepareStatement(context.sql(), Statement.RETURN_GENERATED_KEYS);
             S strategy = context.strategy();
             strategy.setParameters(statement);
             applyIternalStrategy(strategy);
@@ -55,7 +53,20 @@ public abstract class AbstractRequest <S extends StatementContext.ExecutionStrat
 
     }
 
-    static class CUDRequest extends AbstractRequest<StatementContext.ExecutionStrategy> {
+    static class InsertRequest extends AbstractRequest<InsertContext.InsertStrategy> {
+
+        @Override
+        protected void applyIternalStrategy(InsertContext.InsertStrategy strategy) throws SQLException {
+            statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            if(rs.next()){
+                int generatedKey = rs.getInt(1);
+                strategy.onGeneratedKey(generatedKey);
+            }
+        }
+    }
+
+    static class UDRequest extends AbstractRequest<StatementContext.ExecutionStrategy> {
 
         @Override
         protected void applyIternalStrategy(StatementContext.ExecutionStrategy strategy) throws SQLException {
