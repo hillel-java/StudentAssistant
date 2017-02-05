@@ -5,6 +5,8 @@ import org.itschoolhillel.dnepropetrovsk.entity.Lecture;
 import org.itschoolhillel.dnepropetrovsk.entity.LectureRoom;
 import org.itschoolhillel.dnepropetrovsk.entity.TimeTable;
 
+import java.io.PrintStream;
+
 /**
  * Created by stephenvolf on 14/12/16.
  */
@@ -28,15 +30,20 @@ public class CoursePOJO implements Course {
     }
 
     @Override
-    public void print(){
-        System.out.println("Course: " + this.title);
+    public void print(PrintStream ps){
+        ps.println("Course: " + this.title);
         for (Lecture lecture : this.timeTable.allLectures()) {
-            System.out.println("Lecture " + lecture.title());
-            System.out.println("start: " + lecture.startTime());
-            System.out.println("end: " + lecture.endTime());
-            System.out.println("description: " + lecture.description());
+            ps.println("Lecture " + lecture.title());
+            ps.println("start: " + lecture.startTime());
+            ps.println("end: " + lecture.endTime());
+            ps.println("description: " + lecture.description());
             LectureRoom room = lecture.lectureRoom();
-            System.out.println("room: " + room.floor() + " floor, " + room.number() + ", " + room.description());
+            ps.println("room: " + room.floor() + " floor, " + room.number() + ", " + room.description());
         }
+    }
+
+    @Override
+    public void print(){
+        print(System.out);
     }
 }

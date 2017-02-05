@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <display-name>StudentsAssistant</display-name>
+
+    <servlet>
+        <servlet-name>CoursesServlet</servlet-name>
+        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.CoursesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LecturesServlet</servlet-name>
+        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.LecturesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LecturersServlet</servlet-name>
+        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.LecturersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RoomsServlet</servlet-name>
+        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.RoomsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentsServlet</servlet-name>
+        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.StudentsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CoursesServlet</servlet-name>
+        <url-pattern>/courses/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturesServlet</servlet-name>
+        <url-pattern>/lectures/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturersServlet</servlet-name>
+        <url-pattern>/lecturers/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomsServlet</servlet-name>
+        <url-pattern>/rooms/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentsServlet</servlet-name>
+        <url-pattern>/students/*</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>org.itschoolhillel.dnepropetrovsk.ContextListener</listener-class>
+    </listener>
+
+</web-app>
