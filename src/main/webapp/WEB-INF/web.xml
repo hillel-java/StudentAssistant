@@ -24,8 +24,8 @@
         <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.RoomsServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StudentsServlet</servlet-name>
-        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.StudentsServlet</servlet-class>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.UsersServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -45,8 +45,8 @@
         <url-pattern>/rooms/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StudentsServlet</servlet-name>
-        <url-pattern>/students/*</url-pattern>
+        <servlet-name>UsersServlet</servlet-name>
+        <url-pattern>/users/*</url-pattern>
     </servlet-mapping>
 
     <listener>
