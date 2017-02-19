@@ -5,6 +5,7 @@ import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.InsertContext
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.QueryContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.StatementContext;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 /**
@@ -14,7 +15,7 @@ public abstract class AbstractRequest <S extends StatementContext.ExecutionStrat
     protected ResultSet resultSet;
     protected PreparedStatement statement;
 
-    public void doRequest(BoneCP connectionPool, StatementContext context) {
+    public void doRequest(DataSource connectionPool, StatementContext context) {
         Connection connection = null;
         try {
             connection = connectionPool.getConnection();

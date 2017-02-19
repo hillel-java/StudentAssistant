@@ -14,35 +14,12 @@ import java.util.Date;
  * Created by stephenvolf on 08/01/17.
  */
 public class Application {
-    private final Date from;
-    private final Date to;
-    private final String courseName;
 
-    public Application(Date from, Date to, String courseName){
-        this.from = from;
-        this.to = to;
-        this.courseName = courseName;
+    public Application() {
+
     }
 
-    public void run(){
-        SQLEntitySource entitySource = new SQLEntitySource();
-//        EntitySource entitySource = new JsonEntitySource();
-
-
-        Calendar calendar = Calendar.getInstance();
-        Date startTime = calendar.getTime();
-        calendar.add(Calendar.HOUR_OF_DAY, 2);
-        Date endDime = calendar.getTime();
-
-
-        Lecture lecture = new LecturePOJO(startTime, endDime, null, "title", "decription");
-        entitySource.addLecture(null, lecture);
-
-
-        Course course = entitySource.course(this.courseName);
-        //TODO: implement date filtration
-        course.print();
-
-        entitySource.close();
+    public void run() {
+        //all the logic here
     }
 }

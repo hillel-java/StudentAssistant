@@ -31,7 +31,7 @@ public class LecturesServlet extends HttpServlet {
             return;
         }
 
-        EntitySource source = (EntitySource) getServletContext().getAttribute(ContextListener.ENTITY_SOURCE_KEY);
+        EntitySource source = (EntitySource) getServletContext().getAttribute("ContextListener.ENTITY_SOURCE_KEY");
         Course course = source.course(courseName);
         course.print(new PrintStream(resp.getOutputStream()));
     }

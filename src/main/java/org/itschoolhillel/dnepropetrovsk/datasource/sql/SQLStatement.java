@@ -5,15 +5,16 @@ import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.InsertContext
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.QueryContext;
 import org.itschoolhillel.dnepropetrovsk.datasource.sql.statements.StatementContext;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
  * Created by stephenvolf on 11/01/17.
  */
 public class SQLStatement {
-    private final BoneCP connectionPool;
+    private final DataSource connectionPool;
 
-    public SQLStatement(BoneCP connectionPool) {
+    public SQLStatement(DataSource connectionPool) {
         this.connectionPool = connectionPool;
     }
 

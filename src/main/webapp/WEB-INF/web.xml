@@ -8,49 +8,13 @@
     <display-name>StudentsAssistant</display-name>
 
     <servlet>
-        <servlet-name>CoursesServlet</servlet-name>
-        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.CoursesServlet</servlet-class>
+        <servlet-name>StudentsAssistant</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>LecturesServlet</servlet-name>
-        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.LecturesServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LecturersServlet</servlet-name>
-        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.LecturersServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RoomsServlet</servlet-name>
-        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.RoomsServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>org.itschoolhillel.dnepropetrovsk.servlet.UsersServlet</servlet-class>
-    </servlet>
-
     <servlet-mapping>
-        <servlet-name>CoursesServlet</servlet-name>
-        <url-pattern>/courses/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LecturesServlet</servlet-name>
-        <url-pattern>/lectures/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LecturersServlet</servlet-name>
-        <url-pattern>/lecturers/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RoomsServlet</servlet-name>
-        <url-pattern>/rooms/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/users/*</url-pattern>
+        <servlet-name>StudentsAssistant</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <listener>
-        <listener-class>org.itschoolhillel.dnepropetrovsk.ContextListener</listener-class>
-    </listener>
 
 </web-app>
